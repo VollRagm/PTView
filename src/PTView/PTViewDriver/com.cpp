@@ -15,29 +15,28 @@ NTSTATUS CompleteRequest(PDEVICE_OBJECT deviceObject, PIRP irp)
 	return STATUS_SUCCESS;
 }
 
+
 void Unload(PDRIVER_OBJECT driverObject)
 {
 	IoDeleteSymbolicLink(&SymlinkName);
 	IoDeleteDevice(DeviceObject);
-
-	// call the gadget if we manually mapped, 
-	// because the driver will be freed from memory after the call to IoDeleteDriver.
-	if (ManuallyMapped)
-		DeleteDriverGadget(driverObject);
 }
 
-NTSTATUS SetupDevice(PDRIVER_OBJECT driverObject)
+NTSTATUS SetupDevice(PDRIVER_OBJECT driverObject, PDRIVER_DISPATCH ioHandler)
 {
 	DriverObject = driverObject;
-
+	__debugbreak();
 	auto status = IoCreateDevice(driverObject, 0, &DeviceName, FILE_DEVICE_UNKNOWN, FILE_DEVICE_SECURE_OPEN, FALSE, &DeviceObject);
+	DbgPrintEx(0, 0, "IoCreateDevice -> %lx\n", status);
 	ReturnOnFail(status);
 
 	status = IoCreateSymbolicLink(&SymlinkName, &DeviceName);
+	DbgPrintEx(0, 0, "IoCreateSymbolicLink -> %lx\n", status);
 	ReturnOnFail(status);
 
 	DriverObject->MajorFunction[IRP_MJ_CREATE] = CompleteRequest;
 	DriverObject->MajorFunction[IRP_MJ_CLOSE] = CompleteRequest;
+	DriverObject->MajorFunction[IRP_MJ_DEVICE_CONTROL] = ioHandler;
 	DriverObject->DriverUnload = Unload;
 
 	DeviceObject->Flags |= DO_DIRECT_IO;
