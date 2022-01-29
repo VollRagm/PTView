@@ -2,6 +2,7 @@
 using System.IO;
 using static PTViewClient.PTView.Native;
 using static PTViewClient.PTView.Driver.Internal.Constants;
+using System.Linq;
 
 namespace PTViewClient.PTView.Driver
 {
@@ -19,10 +20,28 @@ namespace PTViewClient.PTView.Driver
             return true;
         }
 
-        public void Unload()
+        public ulong GetProcessDirbase(uint processId)
         {
-            DeviceIoControl(DriverHandle, IOCTL_UNLOAD, null, 0, null, 0);
-            CloseHandle(DriverHandle);
+            ulong dirbase = 0;
+            ulong procId = (ulong)processId;
+
+            DeviceIoControl(DriverHandle, IOCTL_DIRBASE, 
+                            &procId, sizeof(ulong),
+                            &dirbase, sizeof(ulong));
+
+            return dirbase;
+        }
+
+        public PTE[] DumpPageTables(ulong dirbase)
+        {
+            ulong[] ptBuffer = new ulong[512];
+
+            fixed (void* buf = ptBuffer)
+                DeviceIoControl(DriverHandle, IOCTL_DUMP_PT,
+                                &dirbase, sizeof(ulong),
+                                buf, (uint)ptBuffer.Length * sizeof(ulong));
+
+            return ptBuffer.Select(x => (PTE)x).ToArray();
         }
     }
 }

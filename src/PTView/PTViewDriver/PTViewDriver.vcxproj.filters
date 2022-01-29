@@ -28,6 +28,9 @@
     <ClInclude Include="com.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ptutil.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="com.cpp">
@@ -36,10 +39,8 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <MASM Include="com_gadget.asm">
+    <ClCompile Include="ptutil.cpp">
       <Filter>Source Files</Filter>
-    </MASM>
+    </ClCompile>
   </ItemGroup>
 </Project>

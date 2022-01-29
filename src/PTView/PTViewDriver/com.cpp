@@ -18,6 +18,7 @@ NTSTATUS CompleteRequest(PDEVICE_OBJECT deviceObject, PIRP irp)
 
 void Unload(PDRIVER_OBJECT driverObject)
 {
+	UNREFERENCED_PARAMETER(driverObject);
 	IoDeleteSymbolicLink(&SymlinkName);
 	IoDeleteDevice(DeviceObject);
 }
