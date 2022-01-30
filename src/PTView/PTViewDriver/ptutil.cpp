@@ -24,9 +24,29 @@ NTSTATUS DumpPageTable(ULONG64 pfn, PVOID outputBuffer)
 	return MmReadPhysical(outputBuffer, sourceAddress, sizeof(pte) * 512, &dummy);
 }
 
-NTSTATUS DumpPage(ULONG64 pfn, PVOID outputBuffer)
+NTSTATUS DumpPage(ULONG64 pfn, bool largePage, PVOID outputBuffer)
 {
 	ULONG64 sourceAddress = pfn << 12;
 	size_t dummy;
-	return MmReadPhysical(outputBuffer, sourceAddress, PAGE_SIZE, &dummy);
+
+	size_t copySize = largePage ? (PAGE_SIZE * 512) : PAGE_SIZE;
+
+	//MmCopyMemory raises the IRQL to dispatch level, paging becomes unavailable.
+	//In this case I use a NonPagedPool as intermediate buffer
+	//The same should be done in DumpPageTable, but it's fine there I guess, since its only gonna copy a single page, 
+	//which is very likely to be mapped
+	PVOID buffer = ExAllocatePool(NonPagedPool, copySize);
+
+	if (buffer)
+	{
+		auto status = MmReadPhysical(buffer, sourceAddress, copySize, &dummy);
+		if (NT_SUCCESS(status))
+			memcpy(outputBuffer, buffer, copySize);
+		
+		ExFreePool(buffer);
+
+		return status;
+	}
+	else return STATUS_UNSUCCESSFUL;
+	
 }

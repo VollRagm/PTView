@@ -3,6 +3,8 @@ using System.IO;
 using static PTViewClient.PTView.Native;
 using static PTViewClient.PTView.Driver.Internal.Constants;
 using System.Linq;
+using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 namespace PTViewClient.PTView.Driver
 {
@@ -44,14 +46,15 @@ namespace PTViewClient.PTView.Driver
             return ptBuffer.Select(x => (PTE)x).ToArray();
         }
 
-        public byte[] DumpPage(ulong pfn)
+        public byte[] DumpPage(ulong pfn, bool largePage)
         {
-            byte[] pageBuffer = new byte[0x1000];
+            uint bufferLength = largePage ? 0x1000 * 512u : 0x1000;
+            byte[] pageBuffer = new byte[bufferLength];
 
-            fixed (void* buf = pageBuffer)
-                DeviceIoControl(DriverHandle, IOCTL_DUMP_PAGE,
-                                &pfn, sizeof(ulong),
-                                buf, (uint)pageBuffer.Length);
+            fixed(void* buf = pageBuffer)
+            DeviceIoControl(DriverHandle, largePage ? IOCTL_DUMP_LARGE_PAGE : IOCTL_DUMP_PAGE,
+                            &pfn, sizeof(ulong),
+                            buf, bufferLength);
 
             return pageBuffer;
         }

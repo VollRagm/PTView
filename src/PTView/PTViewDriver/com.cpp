@@ -26,7 +26,7 @@ void Unload(PDRIVER_OBJECT driverObject)
 NTSTATUS SetupDevice(PDRIVER_OBJECT driverObject, PDRIVER_DISPATCH ioHandler)
 {
 	DriverObject = driverObject;
-	__debugbreak();
+
 	auto status = IoCreateDevice(driverObject, 0, &DeviceName, FILE_DEVICE_UNKNOWN, FILE_DEVICE_SECURE_OPEN, FALSE, &DeviceObject);
 	DbgPrintEx(0, 0, "IoCreateDevice -> %lx\n", status);
 	ReturnOnFail(status);

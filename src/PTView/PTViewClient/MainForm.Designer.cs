@@ -47,7 +47,7 @@ namespace PTViewClient
             this.PDeInfoLbl = new System.Windows.Forms.Label();
             this.PDPTeLblInfo = new System.Windows.Forms.Label();
             this.PML4eInfoLbl = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.PtTextLbl = new System.Windows.Forms.Label();
             this.PTListBox = new System.Windows.Forms.ListBox();
             this.label3 = new System.Windows.Forms.Label();
             this.PDListBox = new System.Windows.Forms.ListBox();
@@ -94,7 +94,7 @@ namespace PTViewClient
             this.PTViewPanel.Controls.Add(this.PDeInfoLbl);
             this.PTViewPanel.Controls.Add(this.PDPTeLblInfo);
             this.PTViewPanel.Controls.Add(this.PML4eInfoLbl);
-            this.PTViewPanel.Controls.Add(this.label4);
+            this.PTViewPanel.Controls.Add(this.PtTextLbl);
             this.PTViewPanel.Controls.Add(this.PTListBox);
             this.PTViewPanel.Controls.Add(this.label3);
             this.PTViewPanel.Controls.Add(this.PDListBox);
@@ -235,14 +235,14 @@ namespace PTViewClient
             this.PML4eInfoLbl.Size = new System.Drawing.Size(0, 13);
             this.PML4eInfoLbl.TabIndex = 3;
             // 
-            // label4
+            // PtTextLbl
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(778, 42);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(21, 13);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "PT";
+            this.PtTextLbl.AutoSize = true;
+            this.PtTextLbl.Location = new System.Drawing.Point(778, 42);
+            this.PtTextLbl.Name = "PtTextLbl";
+            this.PtTextLbl.Size = new System.Drawing.Size(21, 13);
+            this.PtTextLbl.TabIndex = 2;
+            this.PtTextLbl.Text = "PT";
             // 
             // PTListBox
             // 
@@ -395,7 +395,7 @@ namespace PTViewClient
         private System.Windows.Forms.ComboBox ProcessesComboBox;
         private System.Windows.Forms.Panel PTViewPanel;
         private System.Windows.Forms.Label DirbaseLbl;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label PtTextLbl;
         private System.Windows.Forms.ListBox PTListBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ListBox PDListBox;

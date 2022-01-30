@@ -31,6 +31,7 @@ namespace PTViewClient
             InitializeComponent();
 
             Driver = new DriverInterface();
+            
             if (!Driver.Initialize("PTView"))
             {
 
@@ -110,8 +111,18 @@ namespace PTViewClient
 
                 if (pde.PFN != 0x0)
                 {
-                    PTEs = Driver.DumpPageTables(pde.PFN).Cast<PTE>().ToArray();
-                    PopulateListView(PTEs, PTListBox);
+                    if (pde.PageSize > 0)
+                    {
+                        //large page
+                        PtTextLbl.Text = "(Large Page)";
+                        PTListBox.Items.Clear();
+                    }
+                    else
+                    {
+                        PTEs = Driver.DumpPageTables(pde.PFN).Cast<PTE>().ToArray();
+                        PopulateListView(PTEs, PTListBox);
+                        PtTextLbl.Text = "PT";
+                    }
                 }
                 else
                     PTListBox.Items.Clear();
@@ -334,27 +345,36 @@ namespace PTViewClient
 
         private void DumpPageBtn_Click(object sender, EventArgs e)
         {
-            if(PTListBox.SelectedItems.Count > 0)
+            if (PTListBox.SelectedItems.Count > 0)
             {
-                var pte = PTEs[PTListBox.SelectedIndex];
-                if(pte.Present > 0 && pte.PFN != 0x0)
-                {
-                    var pageDump = Driver.DumpPage(pte.PFN);
-                    HexDumpView hdv = new HexDumpView(pageDump);
-                    hdv.Show();
-                }
-                else
-                {
-                    if (MessageBox.Show("PTE is invalid, do you want to dump it anyways?", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                    {
-                        var pageDump = Driver.DumpPage(pte.PFN);
-                        HexDumpView hdv = new HexDumpView(pageDump);
-                        hdv.Show();
-                    }
-                }
+                DumpIndexFromPT(PTEs, PTListBox.SelectedIndex, false);
+            }
+            else if (PDListBox.SelectedItems.Count > 0 && PDEs[PDListBox.SelectedIndex].PageSize > 0) //check if selected PDE is a large page
+            {
+                DumpIndexFromPT(PDEs, PDListBox.SelectedIndex, true);
             }
             else
                 MessageBox.Show("No Page Table Entry selected!");
+        }
+
+        private void DumpIndexFromPT(object[] pt, int index, bool largePage)
+        {
+            var pte = (PTE)pt[index];
+            if (pte.Present > 0 && pte.PFN != 0x0)
+            {
+                var pageDump = Driver.DumpPage(pte.PFN, largePage);
+                HexDumpView hdv = new HexDumpView(pageDump);
+                hdv.Show();
+            }
+            else
+            {
+                if (MessageBox.Show("PTE is invalid, do you want to dump it anyways?", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    var pageDump = Driver.DumpPage(pte.PFN, largePage);
+                    HexDumpView hdv = new HexDumpView(pageDump);
+                    hdv.Show();
+                }
+            }
         }
     }
 }

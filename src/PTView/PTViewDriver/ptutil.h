@@ -3,7 +3,7 @@
 
 ULONG64 PsGetDirbase(PEPROCESS proc);
 NTSTATUS DumpPageTable(ULONG64 pfn, PVOID outputBuffer);
-NTSTATUS DumpPage(ULONG64 pfn, PVOID outputBuffer);
+NTSTATUS DumpPage(ULONG64 pfn, bool largePage, PVOID outputBuffer);
 
 typedef union _cr3
 {

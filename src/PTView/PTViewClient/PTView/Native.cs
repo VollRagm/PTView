@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PTViewClient.PTView
 {
-    class Native
+    public static unsafe class Native
     {
         [DllImport("kernel32.dll")]
         public static extern void CloseHandle(IntPtr hdl);
@@ -17,6 +17,7 @@ namespace PTViewClient.PTView
         public static extern IntPtr CreateFile(string filename, uint fileAccess, FileShare sharing, IntPtr SecurityAttributes, FileMode mode, FileOptions options, IntPtr template);
 
         [DllImport("kernel32.dll", SetLastError = true)]
-        public static unsafe extern bool DeviceIoControl(IntPtr hDevice, uint dwIoControlCode, void* lpInBuffer, uint lpInBufferSize, void* lpOutBuffer, uint nOutBufferSize, uint lpBytesReturned = 0, long overlapped = 0);
+        public static extern bool DeviceIoControl(IntPtr hDevice, uint dwIoControlCode, void* lpInBuffer, uint lpInBufferSize, void* lpOutBuffer, uint nOutBufferSize, uint lpBytesReturned = 0, long overlapped = 0);
+
     }
 }
