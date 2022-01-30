@@ -31,12 +31,14 @@ namespace PTViewClient
             InitializeComponent();
 
             Driver = new DriverInterface();
-            //if (!Driver.Initialize("PTView"))
-            //{
+            if (!Driver.Initialize("PTView"))
+            {
 
-            //    MessageBox.Show("Driver could not be initialized, make sure it's loaded properly.");
-            //    Environment.Exit(0);
-            //}
+                MessageBox.Show("Driver could not be initialized, make sure it's loaded properly.");
+                Environment.Exit(0);
+            }
+
+            this.FormClosing += (o, ev) => Driver.Close();
         }
 
         private void ProcessesComboBox_DropDown(object sender, EventArgs e)
@@ -229,18 +231,6 @@ namespace PTViewClient
 
             VirtualAddressInfoLbl.Text = vaInfo;
             VirtualAddressOutput.Text = $"0x{virtualAddress.Value:X8}";
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            var proc  = Process.Start("sc", "start PTView");
-            proc.WaitForExit();
-            Driver.Initialize("PTView");
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            Process.Start("sc", "stop PTView");
         }
 
         private void UpdateContentTmr_Tick(object sender, EventArgs e)

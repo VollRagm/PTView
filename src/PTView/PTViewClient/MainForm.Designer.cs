@@ -33,7 +33,10 @@ namespace PTViewClient
             this.lbl1 = new System.Windows.Forms.Label();
             this.ProcessesComboBox = new System.Windows.Forms.ComboBox();
             this.PTViewPanel = new System.Windows.Forms.Panel();
+            this.DumpPageBtn = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.TranslateBtn = new System.Windows.Forms.Button();
+            this.VirtualAddressInfoLblInput = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.VirtualAddressInput = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -53,16 +56,11 @@ namespace PTViewClient
             this.label1 = new System.Windows.Forms.Label();
             this.PML4ListBox = new System.Windows.Forms.ListBox();
             this.DirbaseLbl = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.UpdateContentTmr = new System.Windows.Forms.Timer(this.components);
             this.label5 = new System.Windows.Forms.Label();
             this.HighlightModeNx = new System.Windows.Forms.RadioButton();
             this.HighlightModeSupervisor = new System.Windows.Forms.RadioButton();
             this.HighlightModeNone = new System.Windows.Forms.RadioButton();
-            this.VirtualAddressInfoLblInput = new System.Windows.Forms.Label();
-            this.TranslateBtn = new System.Windows.Forms.Button();
-            this.DumpPageBtn = new System.Windows.Forms.Button();
             this.PTViewPanel.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -111,6 +109,16 @@ namespace PTViewClient
             this.PTViewPanel.TabIndex = 2;
             this.PTViewPanel.Visible = false;
             // 
+            // DumpPageBtn
+            // 
+            this.DumpPageBtn.Location = new System.Drawing.Point(894, 468);
+            this.DumpPageBtn.Name = "DumpPageBtn";
+            this.DumpPageBtn.Size = new System.Drawing.Size(129, 23);
+            this.DumpPageBtn.TabIndex = 7;
+            this.DumpPageBtn.Text = "Dump Selected Page";
+            this.DumpPageBtn.UseVisualStyleBackColor = true;
+            this.DumpPageBtn.Click += new System.EventHandler(this.DumpPageBtn_Click);
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.TranslateBtn);
@@ -124,6 +132,24 @@ namespace PTViewClient
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Address Translation";
+            // 
+            // TranslateBtn
+            // 
+            this.TranslateBtn.Location = new System.Drawing.Point(60, 117);
+            this.TranslateBtn.Name = "TranslateBtn";
+            this.TranslateBtn.Size = new System.Drawing.Size(102, 23);
+            this.TranslateBtn.TabIndex = 3;
+            this.TranslateBtn.Text = "Translate";
+            this.TranslateBtn.UseVisualStyleBackColor = true;
+            this.TranslateBtn.Click += new System.EventHandler(this.TranslateBtn_Click);
+            // 
+            // VirtualAddressInfoLblInput
+            // 
+            this.VirtualAddressInfoLblInput.AutoSize = true;
+            this.VirtualAddressInfoLblInput.Location = new System.Drawing.Point(16, 50);
+            this.VirtualAddressInfoLblInput.Name = "VirtualAddressInfoLblInput";
+            this.VirtualAddressInfoLblInput.Size = new System.Drawing.Size(0, 13);
+            this.VirtualAddressInfoLblInput.TabIndex = 2;
             // 
             // label7
             // 
@@ -290,26 +316,6 @@ namespace PTViewClient
             this.DirbaseLbl.TabIndex = 0;
             this.DirbaseLbl.Text = "Dirbase (cr3):";
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(938, 11);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Start";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(1019, 11);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "Stop";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
             // UpdateContentTmr
             // 
             this.UpdateContentTmr.Tick += new System.EventHandler(this.UpdateContentTmr_Tick);
@@ -357,34 +363,6 @@ namespace PTViewClient
             this.HighlightModeNone.UseVisualStyleBackColor = true;
             this.HighlightModeNone.CheckedChanged += new System.EventHandler(this.HighlightModeNone_CheckedChanged);
             // 
-            // VirtualAddressInfoLblInput
-            // 
-            this.VirtualAddressInfoLblInput.AutoSize = true;
-            this.VirtualAddressInfoLblInput.Location = new System.Drawing.Point(16, 50);
-            this.VirtualAddressInfoLblInput.Name = "VirtualAddressInfoLblInput";
-            this.VirtualAddressInfoLblInput.Size = new System.Drawing.Size(0, 13);
-            this.VirtualAddressInfoLblInput.TabIndex = 2;
-            // 
-            // TranslateBtn
-            // 
-            this.TranslateBtn.Location = new System.Drawing.Point(60, 117);
-            this.TranslateBtn.Name = "TranslateBtn";
-            this.TranslateBtn.Size = new System.Drawing.Size(102, 23);
-            this.TranslateBtn.TabIndex = 3;
-            this.TranslateBtn.Text = "Translate";
-            this.TranslateBtn.UseVisualStyleBackColor = true;
-            this.TranslateBtn.Click += new System.EventHandler(this.TranslateBtn_Click);
-            // 
-            // DumpPageBtn
-            // 
-            this.DumpPageBtn.Location = new System.Drawing.Point(894, 468);
-            this.DumpPageBtn.Name = "DumpPageBtn";
-            this.DumpPageBtn.Size = new System.Drawing.Size(129, 23);
-            this.DumpPageBtn.TabIndex = 7;
-            this.DumpPageBtn.Text = "Dump Selected Page";
-            this.DumpPageBtn.UseVisualStyleBackColor = true;
-            this.DumpPageBtn.Click += new System.EventHandler(this.DumpPageBtn_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -394,8 +372,6 @@ namespace PTViewClient
             this.Controls.Add(this.HighlightModeSupervisor);
             this.Controls.Add(this.HighlightModeNx);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.PTViewPanel);
             this.Controls.Add(this.ProcessesComboBox);
             this.Controls.Add(this.lbl1);
@@ -419,8 +395,6 @@ namespace PTViewClient
         private System.Windows.Forms.ComboBox ProcessesComboBox;
         private System.Windows.Forms.Panel PTViewPanel;
         private System.Windows.Forms.Label DirbaseLbl;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ListBox PTListBox;
         private System.Windows.Forms.Label label3;

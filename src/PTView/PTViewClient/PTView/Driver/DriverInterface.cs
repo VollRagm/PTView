@@ -55,5 +55,10 @@ namespace PTViewClient.PTView.Driver
 
             return pageBuffer;
         }
+
+        public void Close()
+        {
+            CloseHandle(DriverHandle);
+        }
     }
 }
