@@ -61,11 +61,41 @@ namespace PTViewClient.PTView
             Value = value;
         }
 
-        public ulong Offset { get => ReadBits(Value, 0, 12); }
-        public ulong PTIndex { get => ReadBits(Value, 12, 9); }
-        public ulong PDIndex { get => ReadBits(Value, 21, 9); }
-        public ulong PDPTIndex { get => ReadBits(Value, 30, 9); }
-        public ulong PML4Index { get => ReadBits(Value, 39, 9); }
+        public ulong Offset 
+        { 
+            get => ReadBits(Value, 0, 12);
+            set => Value = SetBits(Value, value, 0, 12);
+        }
+
+        public ulong PTIndex 
+        { 
+            get => ReadBits(Value, 12, 9);
+            set => Value = SetBits(Value, value, 12, 9);
+        }
+
+        public ulong PDIndex 
+        { 
+            get => ReadBits(Value, 21, 9);
+            set => Value = SetBits(Value, value, 21, 9);
+        }
+
+        public ulong PDPTIndex 
+        { 
+            get => ReadBits(Value, 30, 9);
+            set => Value = SetBits(Value, value, 30, 9);
+        }
+
+        public ulong PML4Index 
+        {
+            get => ReadBits(Value, 39, 9);
+            set => Value = SetBits(Value, value, 39, 9);
+        }
+
+        public ulong Reserved
+        {
+            get => ReadBits(Value, 48, 16);
+            set => Value = SetBits(Value, value, 48, 16);
+        }
 
     }
 }

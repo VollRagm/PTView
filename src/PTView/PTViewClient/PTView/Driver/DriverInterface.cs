@@ -32,16 +32,28 @@ namespace PTViewClient.PTView.Driver
             return dirbase;
         }
 
-        public PTE[] DumpPageTables(ulong dirbase)
+        public PTE[] DumpPageTables(ulong pfn)
         {
             ulong[] ptBuffer = new ulong[512];
 
             fixed (void* buf = ptBuffer)
                 DeviceIoControl(DriverHandle, IOCTL_DUMP_PT,
-                                &dirbase, sizeof(ulong),
+                                &pfn, sizeof(ulong),
                                 buf, (uint)ptBuffer.Length * sizeof(ulong));
 
             return ptBuffer.Select(x => (PTE)x).ToArray();
+        }
+
+        public byte[] DumpPage(ulong pfn)
+        {
+            byte[] pageBuffer = new byte[0x1000];
+
+            fixed (void* buf = pageBuffer)
+                DeviceIoControl(DriverHandle, IOCTL_DUMP_PAGE,
+                                &pfn, sizeof(ulong),
+                                buf, (uint)pageBuffer.Length);
+
+            return pageBuffer;
         }
     }
 }

@@ -19,7 +19,14 @@ NTSTATUS DumpPageTable(ULONG64 pfn, PVOID outputBuffer)
 	ULONG64 sourceAddress = pfn << 12;
 
 	size_t dummy;
-	// 512 possible PTE's, because 9 bits in the virtual addressed are used to index them
+	// 512 possible PTE's, because 9 bits in the virtual address are used to index them
 	// 2^9 = 512
 	return MmReadPhysical(outputBuffer, sourceAddress, sizeof(pte) * 512, &dummy);
+}
+
+NTSTATUS DumpPage(ULONG64 pfn, PVOID outputBuffer)
+{
+	ULONG64 sourceAddress = pfn << 12;
+	size_t dummy;
+	return MmReadPhysical(outputBuffer, sourceAddress, PAGE_SIZE, &dummy);
 }

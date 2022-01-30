@@ -35,6 +35,15 @@ NTSTATUS DriverDispatch(PDEVICE_OBJECT device, PIRP irp)
 				ULONG64 pfn = *(ULONG64*)inputBuffer;
 				status = DumpPageTable(pfn, irp->UserBuffer);
 			}
+			break;
+
+		case IOCTL_DUMP_PAGE:
+			if (inputBuffer)
+			{
+				ULONG64 pfn = *(ULONG64*)inputBuffer;
+				status = DumpPage(pfn, irp->UserBuffer);
+			}
+			break;
 	}
 
 	irp->IoStatus.Information = 0;

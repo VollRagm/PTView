@@ -40,6 +40,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,6 +52,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HexDumpView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HexDumpView.Designer.cs">
+      <DependentUpon>HexDumpView.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -64,6 +71,9 @@
     <Compile Include="PTView\Misc.cs" />
     <Compile Include="PTView\Native.cs" />
     <Compile Include="PTView\Structures.cs" />
+    <EmbeddedResource Include="HexDumpView.resx">
+      <DependentUpon>HexDumpView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
