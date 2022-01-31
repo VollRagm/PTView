@@ -15,6 +15,7 @@ After opening the client, select a process and start browsing its page tables!
  - Get the virtual address that leads to the current selection
  - Translate a physical address to virtual address with visualization
  - Get information on a Page table entry
+ - Support for Large Pages
 
 ## Things worth trying out
 
