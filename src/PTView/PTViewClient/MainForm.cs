@@ -253,6 +253,7 @@ namespace PTViewClient
 
         private SolidBrush LightBlue = new SolidBrush(Color.LightBlue);
         private SolidBrush LightGreen = new SolidBrush(Color.LightGreen);
+        private SolidBrush Lime = new SolidBrush(Color.Lime);
 
         private void PML4ListBox_DrawItem(object sender, DrawItemEventArgs e) => DrawListBoxItem(PML4ListBox, e, PML4Es);
         private void PDPTListBox_DrawItem(object sender, DrawItemEventArgs e) => DrawListBoxItem(PDPTListBox, e, PDPTEs);
@@ -266,22 +267,30 @@ namespace PTViewClient
                 bool isNxHighlightMode = HighlightModeNx.Checked;
                 var pml4e = (PML4E)ptes[e.Index];
 
+                SolidBrush sb = null;
+
                 if (pml4e.Present > 0 && pml4e.PFN != 0x0 && !HighlightModeNone.Checked)
                 {
-                    if (isNxHighlightMode && pml4e.NX > 0)
+                    if (isNxHighlightMode && pml4e.NX == 0)
                     {
-                        e.Graphics.FillRectangle(LightBlue, e.Bounds);
+                        sb = LightGreen;
                     }
                     else if (!isNxHighlightMode)
                     {
                         if (pml4e.UserSupervisor > 0)
-                            e.Graphics.FillRectangle(LightGreen, e.Bounds);
+                            sb = LightGreen;
                         else
-                            e.Graphics.FillRectangle(LightBlue, e.Bounds);
+                            sb = LightBlue;
                     }
-                    else e.DrawBackground();
                 }
-                else e.DrawBackground();
+
+                if (pml4e.PFN == SelectedProcessDirbase && PML4AutoEntryHighlight.Checked)
+                    sb = Lime;
+
+                if(sb != null)
+                    e.Graphics.FillRectangle(sb, e.Bounds);
+                else
+                    e.DrawBackground();
 
                 using (Brush textBrush = new SolidBrush(e.ForeColor))
                 {

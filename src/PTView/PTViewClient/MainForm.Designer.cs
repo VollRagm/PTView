@@ -61,6 +61,7 @@ namespace PTViewClient
             this.HighlightModeNx = new System.Windows.Forms.RadioButton();
             this.HighlightModeSupervisor = new System.Windows.Forms.RadioButton();
             this.HighlightModeNone = new System.Windows.Forms.RadioButton();
+            this.PML4AutoEntryHighlight = new System.Windows.Forms.CheckBox();
             this.PTViewPanel.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -334,9 +335,9 @@ namespace PTViewClient
             this.HighlightModeNx.AutoSize = true;
             this.HighlightModeNx.Location = new System.Drawing.Point(457, 54);
             this.HighlightModeNx.Name = "HighlightModeNx";
-            this.HighlightModeNx.Size = new System.Drawing.Size(117, 17);
+            this.HighlightModeNx.Size = new System.Drawing.Size(194, 17);
             this.HighlightModeNx.TabIndex = 5;
-            this.HighlightModeNx.Text = "Highlight NX Pages";
+            this.HighlightModeNx.Text = "Highlight executable pages in green";
             this.HighlightModeNx.UseVisualStyleBackColor = true;
             this.HighlightModeNx.CheckedChanged += new System.EventHandler(this.HighlightModeNx_CheckedChanged);
             // 
@@ -345,9 +346,9 @@ namespace PTViewClient
             this.HighlightModeSupervisor.AutoSize = true;
             this.HighlightModeSupervisor.Location = new System.Drawing.Point(457, 34);
             this.HighlightModeSupervisor.Name = "HighlightModeSupervisor";
-            this.HighlightModeSupervisor.Size = new System.Drawing.Size(246, 17);
+            this.HighlightModeSupervisor.Size = new System.Drawing.Size(242, 17);
             this.HighlightModeSupervisor.TabIndex = 5;
-            this.HighlightModeSupervisor.Text = "Highlight User (Green) and Kernel (Blue) Pages";
+            this.HighlightModeSupervisor.Text = "Highlight User (green) and Kernel (blue) pages";
             this.HighlightModeSupervisor.UseVisualStyleBackColor = true;
             // 
             // HighlightModeNone
@@ -363,11 +364,22 @@ namespace PTViewClient
             this.HighlightModeNone.UseVisualStyleBackColor = true;
             this.HighlightModeNone.CheckedChanged += new System.EventHandler(this.HighlightModeNone_CheckedChanged);
             // 
+            // PML4AutoEntryHighlight
+            // 
+            this.PML4AutoEntryHighlight.AutoSize = true;
+            this.PML4AutoEntryHighlight.Location = new System.Drawing.Point(713, 16);
+            this.PML4AutoEntryHighlight.Name = "PML4AutoEntryHighlight";
+            this.PML4AutoEntryHighlight.Size = new System.Drawing.Size(210, 17);
+            this.PML4AutoEntryHighlight.TabIndex = 7;
+            this.PML4AutoEntryHighlight.Text = "Highlight PML4 auto-entry in lime green";
+            this.PML4AutoEntryHighlight.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1169, 710);
+            this.Controls.Add(this.PML4AutoEntryHighlight);
             this.Controls.Add(this.HighlightModeNone);
             this.Controls.Add(this.HighlightModeSupervisor);
             this.Controls.Add(this.HighlightModeNx);
@@ -422,6 +434,7 @@ namespace PTViewClient
         private System.Windows.Forms.Label VirtualAddressInfoLblInput;
         private System.Windows.Forms.Button TranslateBtn;
         private System.Windows.Forms.Button DumpPageBtn;
+        private System.Windows.Forms.CheckBox PML4AutoEntryHighlight;
     }
 }
 
