@@ -2,6 +2,11 @@
 This utility allows you to inspect a Windows processes Page Tables live.
 You can browse through them in a GUI and dump the physical pages they point to, as well a translate virtual to physical addresses and get the virtual address to a PTE.
 
+## Usage
+You will have to load the driver before running the client.
+I recommend loading the Driver normally in testmode, but it can be mapped as well, just make sure the first argument is the driver base and the second argument is NULL.
+After opening the client, select a process and start browsing its page tables!
+
 ## Key features
 
  - Browse Page Tables of Processes, including system processes
