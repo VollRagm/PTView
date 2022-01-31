@@ -31,3 +31,6 @@ Note that this address only is valid in the selected processes context.
 Get the virtual address of an unused loaded module in the process. Enter it in the Virtual Address textbox and translate it.
 Chances are that the PTE of that VA or the subsequent PTE's PFNs is 0x0. 
 Now access the virtual address using a Debugger or Memory viewer, like Cheat Engine, and you will see how it raises a page fault, causing Windows Memory Manager to map the pages live.
+
+
+A prebuilt release can be downloaded [here.](https://www.unknowncheats.me/forum/downloads.php?do=file&id=36119)
