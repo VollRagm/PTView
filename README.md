@@ -34,4 +34,4 @@ Chances are that the PTE of that VA or the subsequent PTE's PFNs is 0x0.
 Now access the virtual address using a Debugger or Memory viewer, like Cheat Engine, and you will see how it raises a page fault, causing Windows Memory Manager to map the pages live.
 
 
-A prebuilt release can be downloaded [here.](https://www.unknowncheats.me/forum/downloads.php?do=file&id=36119)
+A prebuilt release can be downloaded [here.](https://github.com/VollRagm/PTView/releases/latest)
